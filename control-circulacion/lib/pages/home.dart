@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.red, // status bar color
+      statusBarColor: claroColor, // status bar color
     ));
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -31,58 +31,55 @@ class _HomeState extends State<Home> {
         padding: EdgeInsets.all(20),
         width: double.infinity,
         height: double.infinity,
-        child: Stack(
-          alignment: Alignment.topCenter,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          // mainAxisSize: MainAxisSize.min,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 25),
-                  child: Image.asset(
-                    'assets/claro.jpg',
-                    height: 100,
-                    width: 100,
-                    fit: BoxFit.fitWidth,
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 15),
-                  child: Text(
-                    'VERIFICACIÓN DE PERSONAS',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Container(
-                  child: Column(
-                    children: [
-                      Text(
-                        'Ingrese el número de documento',
-                        style: TextStyle(
-                            color: Colors.grey, height: 2, fontSize: 20),
-                        // textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'para validar los datos',
-                        style: TextStyle(
-                            color: Colors.grey, height: 2, fontSize: 20),
-                        // textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'ciudadano',
-                        style: TextStyle(
-                            color: Colors.grey, height: 2, fontSize: 20),
-                        // textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            Container(
+              margin: EdgeInsets.only(top: 25),
+              child: Image.asset(
+                'assets/claro.jpg',
+                height: 100,
+                width: 100,
+                fit: BoxFit.fitWidth,
+              ),
             ),
             Container(
-              alignment: Alignment.bottomCenter,
-              margin: EdgeInsets.fromLTRB(10, 0, 10, 35),
+              margin: EdgeInsets.only(top: 15),
+              child: Text(
+                'VERIFICACIÓN DE PERSONAS',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  Text(
+                    'Ingrese el número de documento',
+                    style:
+                        TextStyle(color: Colors.grey, height: 2, fontSize: 20),
+                    // textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    'para validar los datos',
+                    style:
+                        TextStyle(color: Colors.grey, height: 2, fontSize: 20),
+                    // textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    'ciudadano',
+                    style:
+                        TextStyle(color: Colors.grey, height: 2, fontSize: 20),
+                    // textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(child: Container()),
+            Container(
+              margin: EdgeInsets.only(bottom: 25),
+              width: double.infinity,
               child: ElevatedButton(
                 onPressed: () => showInputDialog(context).then((ciValue) {
                   myController.text = ''; //Limpiar textfield
@@ -97,9 +94,9 @@ class _HomeState extends State<Home> {
                   }
                 }),
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(20, 18, 20, 18),
+                  padding: EdgeInsets.symmetric(vertical: 15),
                   child: Text(
-                    'INGRESAR NÚMERO DE DOCUMENTO',
+                    'INGRESAR ',
                   ),
                 ),
                 style: ElevatedButton.styleFrom(

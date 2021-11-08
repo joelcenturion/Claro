@@ -18,14 +18,17 @@ class _PersonState extends State<Person> {
     if (index == 0) {
       Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     } else if (index == 1) {
+      print('times verified');
+      print(Global.times_verified_face);
+
       Navigator.pushNamed(context, '/camera');
     }
   }
 
   Color claroColor = const Color(0xffDA291C);
   //Color de cuadro sobre foto de ci
-  Color? _color = Colors.green[400];
-  IconData _icon = Icons.offline_pin_outlined;
+  Color? _color;
+  IconData? _icon;
   // height y widht de Foto de cédula
   late double height;
   late double widht;
@@ -34,7 +37,7 @@ class _PersonState extends State<Person> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color(0xffF1AF4B), // status bar color
+      statusBarColor: Color(0xffDA291C), // status bar color
     ));
     person = ModalRoute.of(context)!.settings.arguments as Map;
     //Tamaño para la foto de ci y para la foto de reco facial
@@ -42,14 +45,18 @@ class _PersonState extends State<Person> {
     widht = person['widht'];
     //Según resultado de la verificación facial, se eligen el icono y el color
     //para el mensaje que está sobre la foto de ci
-    if (Global.recoResult == false) {
+    if (person['message'] == 'RECO FACIAL NEGATIVO') {
       _color = Colors.red;
       _icon = Icons.close;
+    } else {
+      _color = Colors.green[400];
+      _icon = Icons.offline_pin_outlined;
     }
     return Scaffold(
       body: SafeArea(
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 20),
+          padding: EdgeInsets.only(top: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,7 +72,7 @@ class _PersonState extends State<Person> {
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(bottom: 5),
+                margin: EdgeInsets.only(bottom: 5, top: 5),
                 child: Text(
                   'VERIFICACIÓN DE PERSONAS',
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
@@ -117,6 +124,7 @@ class _PersonState extends State<Person> {
               ),
               //3er. elemento de la columna principal. CI, Nombre, Fecha de nacimiento
               Divider(
+                height: 5,
                 thickness: 2,
               ),
               Container(
@@ -217,6 +225,7 @@ class _PersonState extends State<Person> {
                 ),
               ),
               Divider(
+                height: 5,
                 thickness: 2,
               ),
               //4to. elemento de la columna principal. Datos de Vacunación

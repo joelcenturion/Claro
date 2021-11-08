@@ -17,6 +17,7 @@ class _LoadingState extends State<Loading> {
     //SI NO HAY ERRORES SE CARGAN LOS DATOS DE LA PERSONA. SI HAY ALGÚN ERROR SE VUELVE A LA
     //PÁGINA PRINCIPAL
     if (Global.error == false) {
+      Global.times_verified_face = 0;
       Navigator.pushReplacementNamed(context, '/person', arguments: {
         //Pasar los valores a la página person.dart para mostrar
         'message': Global.message,

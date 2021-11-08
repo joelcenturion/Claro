@@ -53,6 +53,26 @@ class _CameraState extends State<Camera> {
       print(e);
       error = true;
     }
+
+    Uint8List landmark_data;
+    try {
+      String url = 'http://192.168.100.73:8081/';
+      http.Response response = await http.post(
+        Uri.parse(url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: convert.jsonEncode(<String, String>{
+          'image': Global.cameraBase64,
+        }),
+      );
+      if (response.statusCode == 200) {
+        landmark_data = convert.base64Decode(convert.jsonDecode(response.body));
+        Global.photoBytes = landmark_data;
+      }
+    } catch (e) {
+      print('Error landmark');
+    }
   }
 
   void doFaceRecognition() async {
@@ -63,9 +83,9 @@ class _CameraState extends State<Camera> {
       Global.message = 'RECO FACIAL POSITIVO';
     } else {
       Global.recoResult = false;
-      Global.message = 'RECO FACIA NEGATIVO';
+      Global.message = 'RECO FACIAL NEGATIVO';
     }
-
+    Global.times_verified_face++;
     Navigator.pushReplacementNamed(context, '/person', arguments: {
       'message': Global.message,
       'name': Global.name,
@@ -112,6 +132,7 @@ class _CameraState extends State<Camera> {
     final path = this.image!.path;
     final bytes = await File(path).readAsBytes();
     Global.cameraBase64 = convert.base64Encode(bytes);
+    print('do faceRecognition');
     doFaceRecognition();
   }
 
