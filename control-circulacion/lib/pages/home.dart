@@ -25,89 +25,90 @@ class _HomeState extends State<Home> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: claroColor, // status bar color
     ));
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Container(
-        padding: EdgeInsets.all(20),
-        width: double.infinity,
-        height: double.infinity,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          // mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              margin: EdgeInsets.only(top: 25),
-              child: Image.asset(
-                'assets/claro.jpg',
-                height: 100,
-                width: 100,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 15),
-              child: Text(
-                'VERIFICACIÓN DE PERSONAS',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Container(
-              child: Column(
-                children: [
-                  Text(
-                    'Ingrese el número de documento',
-                    style:
-                        TextStyle(color: Colors.grey, height: 2, fontSize: 20),
-                    // textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'para validar los datos',
-                    style:
-                        TextStyle(color: Colors.grey, height: 2, fontSize: 20),
-                    // textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'ciudadano',
-                    style:
-                        TextStyle(color: Colors.grey, height: 2, fontSize: 20),
-                    // textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-            Expanded(child: Container()),
-            Container(
-              margin: EdgeInsets.only(bottom: 25),
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () => showInputDialog(context).then((ciValue) {
-                  myController.text = ''; //Limpiar textfield
-                  ciValue = ciValue.replaceAll(' ', ''); //Remove white spaces
-                  RegExp regexp =
-                      RegExp(r'^[0-9]*$'); //Para validación de sólo números
-                  if (!regexp.hasMatch(ciValue)) {
-                    showAlert();
-                  } else if (ciValue != false && ciValue != '') {
-                    Global.ci = ciValue;
-                    Navigator.pushNamed(context, '/loading');
-                  }
-                }),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  child: Text(
-                    'INGRESAR ',
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  primary: claroColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25),
-                  ),
+    return SafeArea(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Container(
+          padding: EdgeInsets.all(25),
+          width: double.infinity,
+          height: double.infinity,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            // mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                child: Image.asset(
+                  'assets/claro.jpg',
+                  height: 100,
+                  width: 100,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
-            ),
-          ],
+              Container(
+                margin: EdgeInsets.only(top: 15),
+                child: Text(
+                  'VERIFICACIÓN DE PERSONAS',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    Text(
+                      'Ingrese el número de documento',
+                      style: TextStyle(
+                          color: Colors.grey, height: 2, fontSize: 20),
+                      // textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      'para validar los datos del',
+                      style: TextStyle(
+                          color: Colors.grey, height: 2, fontSize: 20),
+                      // textAlign: TextAlign.center,
+                    ),
+                    Text(
+                      'ciudadano',
+                      style: TextStyle(
+                          color: Colors.grey, height: 2, fontSize: 20),
+                      // textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(child: Container()),
+              Container(
+                margin: EdgeInsets.only(bottom: 25),
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => showInputDialog(context).then((ciValue) {
+                    myController.text = ''; //Limpiar textfield
+                    ciValue = ciValue.replaceAll(' ', ''); //Remove white spaces
+                    RegExp regexp =
+                        RegExp(r'^[0-9]*$'); //Para validación de sólo números
+                    if (!regexp.hasMatch(ciValue)) {
+                      showAlert();
+                    } else if (ciValue != false && ciValue != '') {
+                      Global.ci = ciValue;
+                      Navigator.pushNamed(context, '/loading');
+                    }
+                  }),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 15),
+                    child: Text(
+                      'INGRESAR ',
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    primary: claroColor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

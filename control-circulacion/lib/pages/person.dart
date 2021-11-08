@@ -18,9 +18,6 @@ class _PersonState extends State<Person> {
     if (index == 0) {
       Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     } else if (index == 1) {
-      print('times verified');
-      print(Global.times_verified_face);
-
       Navigator.pushNamed(context, '/camera');
     }
   }
@@ -55,8 +52,7 @@ class _PersonState extends State<Person> {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          padding: EdgeInsets.only(top: 15),
+          padding: EdgeInsets.all(20),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,

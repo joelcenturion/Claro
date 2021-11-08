@@ -78,5 +78,4 @@ class Global {
   static late String dosage;
   static late String vaccine;
   static late Uint8List photoBytes;
-  static int times_verified_face = 0;
 }
