@@ -95,7 +95,9 @@ class _CameraState extends State<Camera> {
       'vaccine': Global.vaccine,
       'photoBytes': Global.photoBytes,
       'height': 210.0,
-      'widht': 140.0
+      'widht': 140.0,
+      'first_name': Global.first_name,
+      'last_name': Global.last_name,
     });
   }
 

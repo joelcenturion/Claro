@@ -27,7 +27,10 @@ class _LoadingState extends State<Loading> {
         'vaccine': Global.vaccine,
         'photoBytes': Global.photoBytes,
         'widht': 120.0,
-        'height': 160.0
+        'height': 160.0,
+        'first_name': Global.first_name,
+        'last_name': Global.last_name,
+        'vaccine_date': Global.vaccine_date
       });
     } else {
       //SI HAY ALGÚN ERROR. RETORNA A LA PÁGINA PRINCIPAL;

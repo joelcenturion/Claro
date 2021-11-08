@@ -170,7 +170,7 @@ class _PersonState extends State<Person> {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Text(
-                                    '${person['name']}'.toUpperCase(),
+                                    '${person['first_name']}'.toUpperCase(),
                                     style: TextStyle(color: Colors.grey[600]),
                                   ),
                                 ),
@@ -191,7 +191,7 @@ class _PersonState extends State<Person> {
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Text(
-                                    '${person['name']}'.toUpperCase(),
+                                    '${person['last_name']}'.toUpperCase(),
                                     style: TextStyle(color: Colors.grey[600]),
                                   ),
                                 ),
@@ -290,7 +290,7 @@ class _PersonState extends State<Person> {
                                     color: Colors.black, fontSize: 17),
                               ),
                               Text(
-                                '',
+                                '${person['vaccine_date']}',
                                 style: TextStyle(color: Colors.grey[600]),
                               ),
                             ],

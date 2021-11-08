@@ -6,6 +6,9 @@ import 'package:flutter/material.dart';
 class PersonData {
   late String message;
   late String name;
+  late String first_name;
+  late String last_name;
+  late String vaccine_date;
   late String ci;
   late String bornDate;
   late int dosage;
@@ -35,6 +38,12 @@ class PersonData {
         dosage = data['response'][0]['dosage'];
         vaccine = data['response'][0]['vaccine'];
         photoString = data['response'][0]['photo'];
+        first_name = data['response'][0]['first_name'];
+        last_name = data['response'][0]['last_name'];
+        vaccine_date = data['response'][0]['fecha_aplicacion'];
+        Global.vaccine_date = vaccine_date;
+        Global.first_name = first_name;
+        Global.last_name = last_name;
         Global.message = message;
         Global.name = name;
         Global.ci = ci;
@@ -53,13 +62,15 @@ class PersonData {
         Global.photoBytes = photoBytes;
         //PARA RECONOCIMIENTO FACIAL
         Global.ciBase64 = photoString;
+        Global.error = false;
       } else {
         //SI statuscode != 200 hay algún error
         Global.error = true;
       }
+      print('ended');
     } catch (e) {
       //SI HAY ALGÚN ERROR
-      print('ERROR');
+      print('ERRORRRR');
       Global.error = true;
     }
   }
@@ -78,4 +89,7 @@ class Global {
   static late String dosage;
   static late String vaccine;
   static late Uint8List photoBytes;
+  static late String first_name;
+  static late String last_name;
+  static late String vaccine_date;
 }
