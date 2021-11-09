@@ -83,13 +83,13 @@ class Global {
   static late String cameraBase64; //Foto de cámara en base64
   static bool recoResult = true; // Resultado del reconocimiento facial
   //Datos de la persona
-  static late String message;
-  static late String name;
-  static late String bornDate;
-  static late String dosage;
-  static late String vaccine;
+  static late String message = '';
+  static late String name = '';
+  static late String bornDate = '';
+  static late String dosage = '';
+  static late String vaccine = '';
   static late Uint8List photoBytes;
-  static late String first_name;
-  static late String last_name;
-  static late String vaccine_date;
+  static late String first_name = '';
+  static late String last_name = '';
+  static late String vaccine_date = '';
 }
