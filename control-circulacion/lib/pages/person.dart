@@ -22,13 +22,21 @@ class _PersonState extends State<Person> {
     }
   }
 
+  Color? _iconDosisColor;
+  IconData? _iconDosis;
+
+  //El titulo RECO FACIAL está oculto antes de hacer el reconocimiento facial
+  bool titleIsHidden = true;
   Color claroColor = const Color(0xffDA291C);
+
   //Color de cuadro sobre foto de ci
   Color? _color;
   IconData? _icon;
+
   // height y widht de Foto de cédula
   late double height;
   late double widht;
+
   //Obtener datos de la persona desde loading.dart
   Map person = {};
   @override
@@ -45,10 +53,29 @@ class _PersonState extends State<Person> {
     if (person['message'] == 'RECO FACIAL NEGATIVO') {
       _color = Colors.red;
       _icon = Icons.close;
+      titleIsHidden = false;
+    } else if (person['message'] == 'RECO FACIAL POSITIVO') {
+      _color = Colors.green[400];
+      _icon = Icons.offline_pin_outlined;
+      titleIsHidden = false;
     } else {
+      titleIsHidden = true;
       _color = Colors.green[400];
       _icon = Icons.offline_pin_outlined;
     }
+
+    if (person['dosage'] == '1RA.') {
+      _iconDosis = Icons.warning_amber_outlined;
+      _iconDosisColor = Colors.orange[800];
+    } else if (person['dosage'] == '2DA.') {
+      _iconDosis = Icons.offline_pin_outlined;
+      _iconDosisColor = Colors.green[400];
+    } else {
+      _iconDosis = Icons.close;
+      _iconDosisColor = Colors.red;
+    }
+    print(person['message']);
+    print(titleIsHidden);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -80,31 +107,35 @@ class _PersonState extends State<Person> {
                 ],
               ),
               //1er. elemento de la columna principal.
-              Container(
-                padding: EdgeInsets.symmetric(vertical: 7.5, horizontal: 10),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(100),
-                  color: _color,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      _icon,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      '   ${person['message']}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
+              titleIsHidden
+                  ? Container(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 7.5, horizontal: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: _color,
                       ),
-                    ),
-                  ],
-                ),
-              ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            _icon,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            '   ${person['message']}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  : SizedBox(),
+
               //2do. elemento de la columna principal. Foto de la persona.
               Container(
                 height: height,
@@ -273,8 +304,12 @@ class _PersonState extends State<Person> {
                                       color: Colors.black, fontSize: 17),
                                 ),
                                 Text(
-                                  '${person['dosage']}',
+                                  '${person['dosage']}  ',
                                   style: TextStyle(color: Colors.grey[600]),
+                                ),
+                                Icon(
+                                  _iconDosis,
+                                  color: _iconDosisColor,
                                 ),
                               ],
                             ),

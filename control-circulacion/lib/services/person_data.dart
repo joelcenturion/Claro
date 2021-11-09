@@ -53,7 +53,7 @@ class PersonData {
         } else if (dosage == 2) {
           Global.dosage = '2DA.';
         } else {
-          Global.dosage = '';
+          Global.dosage = 'Ninguna';
         }
 
         Global.vaccine = vaccine;
