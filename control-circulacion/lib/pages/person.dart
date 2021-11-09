@@ -57,22 +57,27 @@ class _PersonState extends State<Person> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                // decoration:
-                //     BoxDecoration(border: Border.all(color: Colors.black)),
-                child: Image.asset(
-                  'assets/claro.jpg',
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 5, top: 5),
-                child: Text(
-                  'VERIFICACIÓN DE PERSONAS',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                    // decoration:
+                    //     BoxDecoration(border: Border.all(color: Colors.black)),
+                    child: Image.asset(
+                      'assets/claro.jpg',
+                      height: 75,
+                      width: 75,
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ),
+                  Container(
+                    child: Text(
+                      'VERIFICACIÓN DE PERSONAS',
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
               //1er. elemento de la columna principal.
               Container(
@@ -119,188 +124,183 @@ class _PersonState extends State<Person> {
                 ),
               ),
               //3er. elemento de la columna principal. CI, Nombre, Fecha de nacimiento
-              Divider(
-                height: 5,
-                thickness: 2,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 3),
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'DATOS PERSONALES',
-                  style: TextStyle(
-                    color: claroColor,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 3,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 3),
-                          child: Row(
-                            children: [
-                              Text(
-                                'C.I.: ',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 17),
-                              ),
-                              Text(
-                                '${person['ci']}',
-                                style: TextStyle(color: Colors.grey[600]),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 3),
-                          child: Row(
-                            children: [
-                              Text(
-                                'NOMBRE: ',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 17),
-                              ),
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Text(
-                                    '${person['first_name']}'.toUpperCase(),
-                                    style: TextStyle(color: Colors.grey[600]),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 3),
-                          child: Row(
-                            children: [
-                              Text(
-                                'APELLIDO: ',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 17),
-                              ),
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Text(
-                                    '${person['last_name']}'.toUpperCase(),
-                                    style: TextStyle(color: Colors.grey[600]),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 3),
-                          child: Row(
-                            children: [
-                              Text(
-                                'FECHA DE NACIMIENTO: ',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 17),
-                              ),
-                              Text(
-                                '${person['born_date']}',
-                                style: TextStyle(color: Colors.grey[600]),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+              Flexible(
+                  child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Divider(
+                      height: 5,
+                      thickness: 2,
                     ),
-                  ),
-                ),
-              ),
-              Divider(
-                height: 5,
-                thickness: 2,
-              ),
-              //4to. elemento de la columna principal. Datos de Vacunación
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 3),
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'DATOS DE VACUNACIÓN',
-                  style: TextStyle(
-                    color: claroColor,
-                  ),
-                ),
-              ),
-
-              Expanded(
-                flex: 2,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 3),
-                          child: Row(
-                            children: [
-                              Text(
-                                'VACUNA: ',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 17),
-                              ),
-                              Expanded(
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: Text(
-                                    '${person['vaccine']}'.toUpperCase(),
-                                    style: TextStyle(color: Colors.grey[600]),
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 3),
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'DATOS PERSONALES',
+                        style: TextStyle(
+                          color: claroColor,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 3),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'C.I.: ',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17),
+                                ),
+                                Text(
+                                  '${person['ci']}',
+                                  style: TextStyle(color: Colors.grey[600]),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 3),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'NOMBRE: ',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17),
+                                ),
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Text(
+                                      '${person['first_name']}'.toUpperCase(),
+                                      style: TextStyle(color: Colors.grey[600]),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 3),
-                          child: Row(
-                            children: [
-                              Text(
-                                'DOSIS APLICADA: ',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 17),
-                              ),
-                              Text(
-                                '${person['dosage']}',
-                                style: TextStyle(color: Colors.grey[600]),
-                              ),
-                            ],
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 3),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'APELLIDO: ',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17),
+                                ),
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Text(
+                                      '${person['last_name']}'.toUpperCase(),
+                                      style: TextStyle(color: Colors.grey[600]),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.symmetric(vertical: 3),
-                          child: Row(
-                            children: [
-                              Text(
-                                'FECHA DE APLICACIÓN: ',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 17),
-                              ),
-                              Text(
-                                '${person['vaccine_date']}',
-                                style: TextStyle(color: Colors.grey[600]),
-                              ),
-                            ],
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 3),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'FECHA DE NACIMIENTO: ',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17),
+                                ),
+                                Text(
+                                  '${person['born_date']}',
+                                  style: TextStyle(color: Colors.grey[600]),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
+                    Divider(
+                      height: 5,
+                      thickness: 2,
+                    ),
+                    //4to. elemento de la columna principal. Datos de Vacunación
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 3),
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'DATOS DE VACUNACIÓN',
+                        style: TextStyle(
+                          color: claroColor,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 3),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'VACUNA: ',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17),
+                                ),
+                                Expanded(
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Text(
+                                      '${person['vaccine']}'.toUpperCase(),
+                                      style: TextStyle(color: Colors.grey[600]),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 3),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'DOSIS APLICADA: ',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17),
+                                ),
+                                Text(
+                                  '${person['dosage']}',
+                                  style: TextStyle(color: Colors.grey[600]),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 3),
+                            child: Row(
+                              children: [
+                                Text(
+                                  'FECHA DE APLICACIÓN: ',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 17),
+                                ),
+                                Text(
+                                  '${person['vaccine_date']}',
+                                  style: TextStyle(color: Colors.grey[600]),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              )),
             ],
           ),
         ),

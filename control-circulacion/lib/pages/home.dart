@@ -34,43 +34,42 @@ class _HomeState extends State<Home> {
           height: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+            // crossAxisAlignment: CrossAxisAlignment.center,
             // mainAxisSize: MainAxisSize.min,
             children: [
               Container(
+                margin: EdgeInsets.only(top: 15),
                 child: Image.asset(
                   'assets/claro.jpg',
-                  height: 100,
-                  width: 100,
+                  height: 120,
+                  width: 120,
                   fit: BoxFit.fitWidth,
                 ),
               ),
               Container(
-                margin: EdgeInsets.only(top: 15),
+                margin: EdgeInsets.only(top: 50),
                 child: Text(
                   'VERIFICACIÓN DE PERSONAS',
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
               Container(
+                margin: EdgeInsets.only(top: 30),
                 child: Column(
                   children: [
                     Text(
                       'Ingrese el número de documento',
-                      style: TextStyle(
-                          color: Colors.grey, height: 2, fontSize: 20),
+                      style: TextStyle(color: Colors.grey, fontSize: 20),
                       // textAlign: TextAlign.center,
                     ),
                     Text(
                       'para validar los datos del',
-                      style: TextStyle(
-                          color: Colors.grey, height: 2, fontSize: 20),
+                      style: TextStyle(color: Colors.grey, fontSize: 20),
                       // textAlign: TextAlign.center,
                     ),
                     Text(
                       'ciudadano',
-                      style: TextStyle(
-                          color: Colors.grey, height: 2, fontSize: 20),
+                      style: TextStyle(color: Colors.grey, fontSize: 20),
                       // textAlign: TextAlign.center,
                     ),
                   ],
