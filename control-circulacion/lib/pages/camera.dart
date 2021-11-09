@@ -98,6 +98,7 @@ class _CameraState extends State<Camera> {
       'widht': 140.0,
       'first_name': Global.first_name,
       'last_name': Global.last_name,
+      'vaccine_date': Global.vaccine_date
     });
   }
 

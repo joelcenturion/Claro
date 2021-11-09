@@ -65,14 +65,15 @@ class _PersonState extends State<Person> {
     }
 
     if (person['dosage'] == '1RA.') {
-      _iconDosis = Icons.warning_amber_outlined;
-      _iconDosisColor = Colors.orange[800];
+      _iconDosis = Icons.warning_rounded;
+      _iconDosisColor = Colors.orange[600];
     } else if (person['dosage'] == '2DA.') {
       _iconDosis = Icons.offline_pin_outlined;
       _iconDosisColor = Colors.green[400];
     } else {
-      _iconDosis = Icons.close;
-      _iconDosisColor = Colors.red;
+      _iconDosis = Icons.highlight_off_rounded;
+      // _iconDosis = Icons.dangerous_rounded;
+      _iconDosisColor = Colors.red[600];
     }
     print(person['message']);
     print(titleIsHidden);
@@ -107,7 +108,7 @@ class _PersonState extends State<Person> {
                 ],
               ),
               //1er. elemento de la columna principal.
-              titleIsHidden
+              !titleIsHidden
                   ? Container(
                       padding:
                           EdgeInsets.symmetric(vertical: 7.5, horizontal: 10),
@@ -140,7 +141,7 @@ class _PersonState extends State<Person> {
               Container(
                 height: height,
                 width: widht,
-                margin: EdgeInsets.symmetric(vertical: 10),
+                margin: EdgeInsets.only(bottom: 10),
                 child: Image.memory(
                   person['photoBytes'],
                   fit: BoxFit.contain,
