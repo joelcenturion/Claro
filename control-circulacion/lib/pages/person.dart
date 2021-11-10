@@ -139,12 +139,15 @@ class _PersonState extends State<Person> {
 
               //2do. elemento de la columna principal. Foto de la persona.
               Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade400),
+                ),
                 height: height,
                 width: widht,
-                margin: EdgeInsets.only(bottom: 10),
+                margin: EdgeInsets.only(bottom: 10, top: 3),
                 child: Image.memory(
                   person['photoBytes'],
-                  fit: BoxFit.contain,
+                  fit: BoxFit.fill,
                   //EN CASO DE QUE NO SE PUEDA CARGAR LA IMAGEN
                   errorBuilder: (BuildContext context, Object exception,
                       StackTrace? stackTrace) {
