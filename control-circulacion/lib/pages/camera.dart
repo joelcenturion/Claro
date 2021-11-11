@@ -1,3 +1,4 @@
+// import 'dart:ffi';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:app/services/person_data.dart';
@@ -38,18 +39,23 @@ class _CameraState extends State<Camera> {
       print('STATUS CODE ${response.statusCode}');
       if (response.statusCode == 200) {
         Map dataTemp = convert.jsonDecode(response.body);
+        print('dataTemp');
         print(dataTemp);
         setState(() {
           if (dataTemp['image2.jpg']['image1.jpg'] != 5) {
             data = dataTemp;
+            print('data');
             print(data);
+          } else {
+            print('No se encontró rostro');
+            error = true;
           }
         });
       } else {
         error = true;
       }
     } catch (e) {
-      print('ERRORRRR');
+      print('ERRORRRR2');
       print(e);
       error = true;
     }
@@ -79,10 +85,10 @@ class _CameraState extends State<Camera> {
     await faceRecognition();
 
     if (data['image2.jpg']['image1.jpg'] < 0.900) {
-      Global.recoResult = true;
+      // Global.recoResult = true;
       Global.message = 'RECO FACIAL POSITIVO';
     } else {
-      Global.recoResult = false;
+      // Global.recoResult = false;
       Global.message = 'RECO FACIAL NEGATIVO';
     }
 
@@ -98,7 +104,7 @@ class _CameraState extends State<Camera> {
       'widht': 160.0,
       'first_name': Global.first_name,
       'last_name': Global.last_name,
-      'vaccine_date': Global.vaccine_date
+      'vaccine_date': Global.vaccine_date,
     });
   }
 
@@ -109,9 +115,12 @@ class _CameraState extends State<Camera> {
     try {
       XFile? image = await ImagePicker().pickImage(source: ImageSource.camera);
       if (image == null) {
+        Global.pages--;
+        print('Global.pages: ${Global.pages}');
         Navigator.pop(context);
         return;
       }
+
       // displayImage = await image.readAsBytes();
       print('displayImage = await image.readAsBytes()');
       // Global.photoBytes = displayImage!;

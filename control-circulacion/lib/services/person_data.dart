@@ -55,7 +55,6 @@ class PersonData {
         } else {
           Global.dosage = 'Ninguna';
         }
-
         Global.vaccine = vaccine;
         //DECODIFICAR IMAGEN
         photoBytes = convert.base64Decode(photoString);
@@ -70,7 +69,7 @@ class PersonData {
       print('ended');
     } catch (e) {
       //SI HAY ALGÚN ERROR
-      print('ERRORRRR');
+      print('ERRORRR1');
       Global.error = true;
     }
   }
@@ -81,7 +80,7 @@ class Global {
   static late String ci;
   static late String ciBase64; // Foto de cédula en base64
   static late String cameraBase64; //Foto de cámara en base64
-  static bool recoResult = true; // Resultado del reconocimiento facial
+  // static bool recoResult = true; // Resultado del reconocimiento facial
   //Datos de la persona
   static late String message = '';
   static late String name = '';
@@ -92,4 +91,7 @@ class Global {
   static late String first_name = '';
   static late String last_name = '';
   static late String vaccine_date = '';
+
+  //Para contar cantidad de páginas apiladas
+  static int pages = 0;
 }

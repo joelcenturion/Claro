@@ -17,6 +17,8 @@ class _LoadingState extends State<Loading> {
     //SI NO HAY ERRORES SE CARGAN LOS DATOS DE LA PERSONA. SI HAY ALGÚN ERROR SE VUELVE A LA
     //PÁGINA PRINCIPAL
     if (Global.error == false) {
+      Global.pages++;
+      print('Global.pages: ${Global.pages}');
       Navigator.pushReplacementNamed(context, '/person', arguments: {
         //Pasar los valores a la página person.dart para mostrar
         'message': Global.message,
@@ -30,7 +32,7 @@ class _LoadingState extends State<Loading> {
         'height': 150.0,
         'first_name': Global.first_name,
         'last_name': Global.last_name,
-        'vaccine_date': Global.vaccine_date
+        'vaccine_date': Global.vaccine_date,
       });
     } else {
       //SI HAY ALGÚN ERROR. RETORNA A LA PÁGINA PRINCIPAL;

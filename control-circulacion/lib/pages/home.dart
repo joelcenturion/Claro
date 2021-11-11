@@ -21,6 +21,12 @@ class _HomeState extends State<Home> {
 
   Color claroColor = Color(0xffDA291C);
   @override
+  void initState() {
+    super.initState();
+    Global.pages = 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: claroColor, // status bar color
