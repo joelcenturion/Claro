@@ -146,7 +146,7 @@ class _PersonState extends State<Person> {
       _iconDosisColor = Colors.red[600];
     }
     print(person['message']);
-    print(titleIsHidden);
+    print('titleIsHidden: $titleIsHidden');
     return WillPopScope(
       onWillPop: () async {
         Global.pages--;
@@ -183,7 +183,7 @@ class _PersonState extends State<Person> {
                     ),
                   ],
                 ),
-                //Mensaje sobre foto de cédula,
+                //MENSAJE SOBRE LA FOTO DE CI. RECOFACIAL
                 !titleIsHidden
                     ? Container(
                         margin: EdgeInsets.only(bottom: 5),
@@ -244,7 +244,7 @@ class _PersonState extends State<Person> {
                       )
                     : SizedBox(),
 
-                //2do. elemento de la columna principal. Foto de la persona.
+                //FOTO DE LA PERSONA
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade400),
@@ -265,7 +265,8 @@ class _PersonState extends State<Person> {
                     },
                   ),
                 ),
-                //3er. elemento de la columna principal. CI, Nombre, Fecha de nacimiento
+
+                //DATOS
                 Flexible(
                     child: SingleChildScrollView(
                   child: Column(
