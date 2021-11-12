@@ -19,6 +19,7 @@ class Camera extends StatefulWidget {
 }
 
 class _CameraState extends State<Camera> {
+  //En caso de que haya algún error con openface ó landmark
   bool error = false;
   Map data = {
     'image2.jpg': {'image1.jpg': 5}
@@ -41,29 +42,28 @@ class _CameraState extends State<Camera> {
         Map dataTemp = convert.jsonDecode(response.body);
         print('dataTemp');
         print(dataTemp);
-        setState(() {
-          if (dataTemp['image2.jpg'] == '') {
-            if (dataTemp['image2.jpg']['image1.jpg'] != 5) {
-              data = dataTemp;
-              print('data');
-              print(data);
-            }
-          } else {
-            print('NO FACES.........');
-            error = true;
-            // showAlert('No se pudo encontrar Rostros');
-          }
-        });
+
+        if (!(dataTemp['image2.jpg']).isEmpty) {
+          // if (dataTemp['image2.jpg']['image1.jpg'] != 5) {
+          data = dataTemp;
+          print('Data: $data');
+          // }
+        } else {
+          print('NO FACES.........');
+          error = true;
+          Global.noFaces = true;
+        }
       } else {
         error = true;
       }
     } catch (e) {
-      print('ERRORRRR2');
-      print(e);
+      print('ERROR FACE RECOGNITION');
+      print('Error: $e');
       error = true;
     }
 
     if (!error) {
+      print('Landmark detection starting...........');
       Uint8List landmark_data;
       try {
         String url = 'http://190.104.149.238:8081/';
@@ -82,7 +82,7 @@ class _CameraState extends State<Camera> {
           Global.photoBytes = landmark_data;
         }
       } catch (e) {
-        print('Error landmark');
+        print('ERROR LANDMARK');
       }
     } else {
       Global.photoBytes = convert.base64Decode(Global.cameraBase64);
@@ -93,10 +93,8 @@ class _CameraState extends State<Camera> {
     await faceRecognition();
 
     if (data['image2.jpg']['image1.jpg'] < 0.900) {
-      // Global.recoResult = true;
       Global.message = 'RECO FACIAL POSITIVO';
     } else {
-      // Global.recoResult = false;
       Global.message = 'RECO FACIAL NEGATIVO';
     }
 
@@ -165,42 +163,5 @@ class _CameraState extends State<Camera> {
     return Scaffold(
       body: Center(child: CircularProgressIndicator()),
     );
-  }
-
-  showAlert(String message) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          Future.delayed(Duration(milliseconds: 700), () {
-            Navigator.pop(context);
-          });
-          var screen = MediaQuery.of(context).size;
-          return Container(
-            child: AlertDialog(
-              backgroundColor: Colors.green,
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.done_rounded,
-                    color: Colors.white,
-                    size: 35,
-                  ),
-                  Text(
-                    '$message',
-                    style: TextStyle(color: Colors.white, fontSize: 15),
-                  ),
-                ],
-              ),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(100)),
-              insetPadding: EdgeInsets.only(
-                  bottom: screen.height * 0.8,
-                  left: screen.width * 0.2,
-                  right: screen.width * 0.2),
-              titlePadding: EdgeInsets.symmetric(vertical: 13),
-            ),
-          );
-        });
   }
 }

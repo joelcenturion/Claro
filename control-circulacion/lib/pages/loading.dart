@@ -19,6 +19,7 @@ class _LoadingState extends State<Loading> {
     if (Global.error == false) {
       Global.pages++;
       print('Global.pages: ${Global.pages}');
+      Global.noFaces = false;
       Navigator.pushReplacementNamed(context, '/person', arguments: {
         //Pasar los valores a la página person.dart para mostrar
         'message': Global.message,

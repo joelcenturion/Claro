@@ -145,8 +145,14 @@ class _PersonState extends State<Person> {
       // _iconDosis = Icons.dangerous_rounded;
       _iconDosisColor = Colors.red[600];
     }
-    print(person['message']);
     print('titleIsHidden: $titleIsHidden');
+
+    Future.delayed(Duration(seconds: 1), () {
+      if (Global.noFaces) {
+        showAlert('No se encontraron Rostros');
+        Global.noFaces = false;
+      }
+    });
     return WillPopScope(
       onWillPop: () async {
         Global.pages--;
@@ -496,5 +502,41 @@ class _PersonState extends State<Person> {
         ),
       ),
     );
+  }
+
+  showAlert(String alert) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          Future.delayed(Duration(milliseconds: 800), () {
+            Navigator.pop(context);
+          });
+          // var screen = MediaQuery.of(context).size;
+          return Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              AlertDialog(
+                // backgroundColor: Colors.orange[900],
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.warning_rounded,
+                      color: Colors.orange[900],
+                    ),
+                    Text(
+                      '   $alert',
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
+                  ],
+                ),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(100)),
+                titlePadding: EdgeInsets.symmetric(vertical: 8),
+              ),
+            ],
+          );
+        });
   }
 }
