@@ -1,4 +1,5 @@
 import 'package:app/pages/camera.dart';
+import 'package:app/services/scanner.dart';
 import 'package:flutter/material.dart';
 import 'package:app/pages/home.dart';
 import 'package:app/pages/person.dart';
@@ -16,6 +17,7 @@ void main() {
       '/loading': (context) => Loading(),
       '/camera': (context) => Camera(),
       '/login': (context) => Login(),
+      '/scanner': (context) => Scanner()
     },
   ));
 }

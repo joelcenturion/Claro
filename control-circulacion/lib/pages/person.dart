@@ -5,6 +5,7 @@ import 'package:mrzflutterplugin/mrzflutterplugin.dart';
 import 'dart:io' show Platform;
 import 'dart:convert';
 import 'package:app/services/person_data.dart';
+import 'package:flutter/services.dart';
 
 class Person extends StatefulWidget {
   // const ({ Key? key }) : super(key: key);
@@ -14,7 +15,7 @@ class Person extends StatefulWidget {
 
 class _PersonState extends State<Person> {
   int selectedIndex = 0;
-  void onItemTapped(int index) {
+  void onItemTapped(int index) async {
     setState(() {
       selectedIndex = index;
     });
@@ -31,6 +32,10 @@ class _PersonState extends State<Person> {
       }
     } else if (index == 2) {
       startScanning();
+      // dynamic result = await Navigator.pushNamed(context, '/scanner');
+      // print('////////////////result/////////////////////////////////////');
+      // print(result.documentNumber);
+      // print(result.givenNames);
     }
   }
 
