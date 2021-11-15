@@ -29,9 +29,9 @@ class Scanner extends StatelessWidget {
                 const CircularProgressIndicator(),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('Awaiting for permissions'),
+                  child: Text('Esperando Permisos'),
                 ),
-                Text('Current status: ${snapshot.data?.toString()}'),
+                Text('Estado: ${snapshot.data?.toString()}'),
               ],
             ),
           ),

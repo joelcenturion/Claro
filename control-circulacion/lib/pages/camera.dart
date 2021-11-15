@@ -111,6 +111,7 @@ class _CameraState extends State<Camera> {
       'first_name': Global.first_name,
       'last_name': Global.last_name,
       'vaccine_date': Global.vaccine_date,
+      'descripcion': Global.descripcion,
     });
   }
 

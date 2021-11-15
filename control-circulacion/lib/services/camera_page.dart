@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mrz_scanner/flutter_mrz_scanner.dart';
 import 'package:flutter/services.dart';
+import 'package:vibration/vibration.dart';
 
 class CameraPage extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   bool isParsed = false;
   MRZController? controller;
-
+  Color claroColor = const Color(0xffDA291C);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,35 +38,47 @@ class _CameraPageState extends State<CameraPage> {
         return;
       }
       isParsed = true;
-      // Navigator.pop(context, result);
-      HapticFeedback.vibrate();
+      Vibration.vibrate();
+      Navigator.pop(context, result);
       print('//////////////////VIBRATE///////////////////////');
       await showDialog<void>(
-          context: context,
-          builder: (context) => AlertDialog(
-                  content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text('Document type: ${result.documentType}'),
-                  Text('Country: ${result.countryCode}'),
-                  Text('Surnames: ${result.surnames}'),
-                  Text('Given names: ${result.givenNames}'),
-                  Text('Document number: ${result.documentNumber}'),
-                  Text('Nationality code: ${result.nationalityCountryCode}'),
-                  Text('Birthdate: ${result.birthDate}'),
-                  Text('Sex: ${result.sex}'),
-                  Text('Expriy date: ${result.expiryDate}'),
-                  Text('Personal number: ${result.personalNumber}'),
-                  Text('Personal number 2: ${result.personalNumber2}'),
-                  ElevatedButton(
-                    child: const Text('ok'),
-                    onPressed: () {
-                      isParsed = false;
-                      return Navigator.pop(context, true);
-                    },
-                  ),
-                ],
-              )));
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              Text('Tipo de Documento: ${result.documentType}'),
+              Text('País: ${result.countryCode}'),
+              Text('Nombre: ${result.givenNames}'),
+              Text('Apellido: ${result.surnames}'),
+              Text('Número de Documento: ${result.documentNumber}'),
+              // Text('Nationality code: ${result.nationalityCountryCode}'),
+              Text(
+                  'Fecha de Nacimiento: ${result.birthDate.toString().substring(0, 10)}'),
+              Text('Sexo: ${result.sex.toString() == 'Sex.male' ? 'M' : 'F'}'),
+              Text(
+                  'Fecha de Vencimiento: ${result.expiryDate.toString().substring(0, 10)}'),
+              // Text('Personal number: ${result.personalNumber}'),
+              // Text('Personal number 2: ${result.personalNumber2}'),
+              // ElevatedButton(
+              //   child: const Text('OK'),
+              //   onPressed: () {
+              //     isParsed = false;
+              //     return Navigator.pop(context);
+              //   },
+              // ),
+            ],
+          ),
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(primary: claroColor),
+              onPressed: () => Navigator.pop(context),
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
       // Navigator.pop(context, result);
     };
     controller.onError = (error) => print(error);

@@ -40,6 +40,7 @@ class PersonData {
         first_name = data['response'][0]['first_name'];
         last_name = data['response'][0]['last_name'];
         vaccine_date = data['response'][0]['fecha_aplicacion'];
+        Global.descripcion = data['response'][0]['estado_descripcion'];
         Global.vaccine_date = vaccine_date;
         Global.first_name = first_name;
         Global.last_name = last_name;
@@ -89,6 +90,7 @@ class Global {
   static late String first_name = '';
   static late String last_name = '';
   static late String vaccine_date = '';
+  static late String descripcion = '';
 
   //Para contar cantidad de páginas apiladas
   static int pages = 0;

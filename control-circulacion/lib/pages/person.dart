@@ -31,11 +31,23 @@ class _PersonState extends State<Person> {
         Navigator.pushNamed(context, '/camera');
       }
     } else if (index == 2) {
-      startScanning();
-      // dynamic result = await Navigator.pushNamed(context, '/scanner');
-      // print('////////////////result/////////////////////////////////////');
+      // startScanning();
+      dynamic result = await Navigator.pushNamed(context, '/scanner');
+      print('////////////////result/////////////////////////////////////');
       // print(result.documentNumber);
-      // print(result.givenNames);
+      // print('result: ');
+      print(result.sex);
+      if (result != null) {
+        setState(() {
+          validationHidden = false;
+          validationString = result.documentNumber;
+        });
+        if (result.documentNumber == Global.ci) {
+          validationString = 'Validación Positiva';
+        } else {
+          validationString = 'Validación Negativa';
+        }
+      }
     }
   }
 
@@ -56,6 +68,7 @@ class _PersonState extends State<Person> {
   IconData? _iconValidation;
   bool validationHidden = true;
   String? validationString;
+  bool scanningFail = false;
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> startScanning() async {
     // Platform messages may fail, so we use a try/catch PlatformException.
@@ -74,17 +87,17 @@ class _PersonState extends State<Person> {
       } else {
         validationString = 'Validación Negativa';
       }
-      print(jsonResult);
     } on PlatformException catch (ex) {
       String? message = ex.message;
-      print('scannerResult = Scanning failed');
+      print('scannerResult = Scanning failed: $message');
+      scanningFail = true;
     }
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
+
     if (!mounted) return;
     setState(() {
-      validationHidden = false;
+      if (!scanningFail) {
+        validationHidden = false;
+      }
     });
   }
 
@@ -372,6 +385,22 @@ class _PersonState extends State<Person> {
                                   ),
                                   Text(
                                     '${person['born_date']}',
+                                    style: TextStyle(color: Colors.grey[600]),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 3),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    'DESCRIPCIÓN: ',
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 17),
+                                  ),
+                                  Text(
+                                    '${person['descripcion']}',
                                     style: TextStyle(color: Colors.grey[600]),
                                   ),
                                 ],

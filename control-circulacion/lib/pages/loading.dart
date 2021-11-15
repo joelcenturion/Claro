@@ -34,6 +34,7 @@ class _LoadingState extends State<Loading> {
         'first_name': Global.first_name,
         'last_name': Global.last_name,
         'vaccine_date': Global.vaccine_date,
+        'descripcion': Global.descripcion,
       });
     } else {
       //SI HAY ALGÚN ERROR. RETORNA A LA PÁGINA PRINCIPAL;
