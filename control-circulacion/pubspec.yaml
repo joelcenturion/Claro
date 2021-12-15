@@ -29,15 +29,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   google_fonts: ^2.1.0
   http: ^0.13.3
-  camera: ^0.9.2+2
-  path_provider: ^2.0.4
+  # camera: ^0.9.2+2
+  # path_provider: ^2.0.4
   path: ^1.8.0
   image: ^3.0.8
   image_picker: ^0.8.4+1
   flutter_spinkit: ^5.1.0
   mrzflutterplugin: ^1.0.7
-  permission_handler: ^8.1.6
+  permission_handler: ^8.3.0
   flutter_mrz_scanner: ^2.0.0
+  # vibration: ^1.7.4-nullsafety.0
   
 
 
